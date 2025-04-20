@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La leyenda de Sant Jordi</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div id="petalContainer"></div>
+
+  <div id="volumeControl">
+    <label id="volumeLabel" for="volumeSlider">Volumen</label>
+    <input type="range" id="volumeSlider" min="0" max="100" value="50">
+  </div>  
+
+  <div id="gameContainer">
+    <div id="startScreen">
+      <img src="assets/images/book_closed.png" alt="Libro cerrado" id="bookClosed">
+      <h1>La leyenda de Sant Jordi</h1>
+      <button id="startButton">Abrir libro</button>
+    </div>
+
+    <div id="dialogueScreen" style="display: none;">
+      <img src="assets/images/book_open.png" alt="Libro abierto" id="bookOpen">
+
+      <div id="bookFrame">
+        <div id="backgroundContainer"></div>
+
+        <div id="minigameFlames" style="display: none;">
+          <div id="flameInstructions">
+            <p>Usa las flechas ← → para esquivar las llamas. Sobrevive 20 segundos.</p>
+            <button id="startFlamesGame">Empezar</button>
+          </div>
+
+          <div id="flameHUD">
+            <div id="timer">20</div>
+            <div id="hearts">
+              <img class="heart" src="assets/images/heart_full.png">
+              <img class="heart" src="assets/images/heart_full.png">
+              <img class="heart" src="assets/images/heart_full.png">
+            </div>
+          </div>
+
+          <div id="flameGameArea">
+            <img id="playerKnight" src="assets/images/sprite_caballero.png" alt="Caballero">
+          </div>
+        </div>
+
+        <div id="qteContainer" style="display: none;">
+          <div id="qteBackground"></div>
+          <div id="qteHUD">
+            <div id="qteTimer">5</div>
+            <button id="qteButtonLeft">←</button>
+            <button id="qteButtonRight">→</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="dialogueContainer">
+      <div id="dialogueBox" style="display: none;">
+        <p id="dialogueText"></p>
+        <div id="triangleIndicator"></div>
+        <form id="nameForm" style="display: none;">
+          <input type="text" id="playerNameInput" placeholder="Escribe tu nombre...">
+          <button type="submit">Aceptar</button>
+        </form>
+        <div id="choices"></div>
+      </div>
+      <button id="backToMenu" style="display: none;">Volver al menú</button>
+    </div>
+  </div>
+
+  <audio id="musicTheme" loop>
+    <source src="assets/sounds/music_theme.mp3" type="audio/mp3">
+  </audio>
+  <audio id="clickSound">
+    <source src="assets/sounds/click.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Scripts -->
+  <script src="js/dialogues.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
