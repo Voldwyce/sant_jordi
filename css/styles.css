@@ -1,0 +1,425 @@
+body {
+  margin: 0;
+  background-color: #1c1c1c;
+  font-family: 'VT323', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+body, #dialogueText, #backgroundContainer, #gameContainer, #bookFrame, #bookOpen, #flameGameArea {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+
+#gameContainer {
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+  z-index: 1;
+}
+
+#startScreen, #dialogueScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#bookClosed, #bookOpen {
+  width: 250px;
+  height: auto;
+  z-index: 2;
+}
+
+#bookFrame {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: 95%;
+  max-width: 700px;
+  aspect-ratio: 4 / 3;
+  border: 8px double #a87c4f;
+  background-color: #f5e3c1;
+  padding: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  display: block;
+}
+
+#backgroundContainer {
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  image-rendering: pixelated; 
+}
+
+
+#dialogueContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -10px;
+}
+
+#dialogueBox {
+  background: rgba(24, 24, 24, 0.95); 
+  color: #f2f2f2; 
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  line-height: 1.5;
+  padding: 16px 20px;
+  border: 2px solid #ffcc66; 
+  border-radius: 12px;
+  max-width: 640px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px rgba(255, 204, 102, 0.3); 
+  text-align: left;
+}
+
+#dialogueText {
+  white-space: pre-wrap;
+  text-align: left; 
+}
+
+
+#triangleIndicator {
+  width: 0;
+  height: 0;
+  margin: 10px auto 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid white;
+  animation: bounce 1s infinite;
+  display: none;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+#nameForm {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+#playerNameInput {
+  font-family: 'VT323', monospace;
+  font-size: 12px;
+  padding: 5px;
+  width: 80%;
+  border: 2px solid black;
+}
+
+#choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button {
+  font-family: 'VT323', monospace;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #ffd700;
+  color: black;
+}
+
+#volumeControl {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
+#volumeSlider {
+  width: 100px;
+}
+
+
+#petalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.petal {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url('../assets/images/petal.png');
+  background-size: cover;
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+#minigameFlames {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 2;
+  background: none;
+}
+
+#flameInstructions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #f2f2f2;
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  line-height: 1.4;
+  padding: 24px;
+  border: 2px solid #ffcc66;
+  border-radius: 12px;
+  text-align: center;
+  width: 60%;
+  z-index: 5;
+  box-shadow: 0 0 16px rgba(255, 204, 102, 0.4);
+}
+
+#flameInstructions button {
+  margin-top: 10px;
+  font-family: 'VT323', monospace;
+  padding: 5px 15px;
+  background: white;
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+#flameHUD {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+#timer {
+  background: rgba(0,0,0,0.7);
+  color: white;
+  font-family: 'VT323', monospace;
+  font-size: 22px;      
+  padding: 4px 8px;       
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.heart {
+  width: 32px; 
+  height: auto;
+}
+
+
+.heart {
+  width: 20px;
+}
+
+#flameGameArea {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  overflow: hidden;
+  z-index: 1;
+
+  background-image: url("../assets/images/scene_esquivar_llamas.png"); 
+  background-size: cover;  
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#playerKnight {
+  position: absolute;
+  bottom: 8px;
+  left: 45%;
+  width: 120px; 
+  z-index: 5;
+  display: block;
+  transform: scaleX(1);
+  transition: transform 0.2s;
+}
+
+.llama {
+  position: absolute;
+  top: -60px;
+  width: 65px; 
+  z-index: 4;
+}
+
+
+
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#qteContainer {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.5); 
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#qteHUD {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+}
+
+#qteButtonLeft,
+#qteButtonRight {
+  background-color: white;
+  color: black;
+  font-family: 'VT323', monospace;
+  border: 2px solid black;
+  padding: 20px;
+  cursor: pointer;
+}
+
+#qteButtonLeft:hover,
+#qteButtonRight:hover {
+  background-color: #ffd700;
+}
+
+#qteTimer {
+  font-size: 30px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+#choices button,
+#backToMenu,
+#startButton,
+#dragonMode,
+#startFlamesGame {
+  font-size: 18px; 
+  padding: 8px 16px;
+}
+
+#nameForm input {
+  font-size: 18px;
+  padding: 6px 12px;
+}
+
+#nameForm button {
+  font-size: 18px;
+  padding: 6px 12px;
+}
+
+#volumeControl {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: white;
+}
+
+#volumeLabel {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#volumeSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 160px;
+  height: 12px;
+  background: transparent;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  margin-top: 5px;
+  position: relative;
+}
+
+#volumeSlider::-webkit-slider-runnable-track {
+  height: 12px;
+  border-radius: 10px;
+  background: transparent; 
+}
+
+
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 6px 6px, #ff4d4d 20%, #b30000 70%);
+  border: 2px solid #ffc0cb;
+  box-shadow: 0 0 2px 1px #ffcccc;
+  margin-top: -6px;
+  transition: transform 0.2s ease;
+}
+
+#volumeSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+#volumeSlider::-moz-range-track {
+  height: 12px;
+  background: transparent;
+  border-radius: 10px;
+}
